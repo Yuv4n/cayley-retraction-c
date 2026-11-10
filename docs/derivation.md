@@ -32,12 +32,28 @@ Hence Q is orthogonal, and so is W⁺.
 
 ## Determinant
 
-det(I − K) = det((I + K)ᵀ) = det(I + K), so det Q = 1 and det W⁺ = det W. The update never turns a rotation into a reflection or the reverse.
+det(I − K) = det((I + K)ᵀ) = det(I + K), so det Q = 1 and det W⁺ = det W. The update never turns a rotation into a reflection or the reverse. For the Procrustes demonstration this matters: starting from a rotation, the iterates can only reach rotations, so the target is the best rotation and not the best orthogonal matrix.
+
+## The matrix M has no zero pivots
+
+Let M = I + K. Its symmetric part is (M + Mᵀ)/2 = I. For any nonzero x, xᵀMx = xᵀx > 0, and the same holds for every leading principal submatrix of M, since each is again I plus a skew-symmetric matrix. Every leading principal submatrix is therefore nonsingular, and Gaussian elimination in exact arithmetic never meets a zero pivot, with or without row exchanges.
+
+## Reading the update
+
+Since I − K = 2I − (I + K), the update can be written
+
+W⁺ = W − η(I + K)⁻¹AW.
+
+Because K is of order η, (I + K)⁻¹ = I + O(η), so to first order W⁺ = W − ηAW. For orthogonal W,
+
+AW = GWᵀW − WGᵀW = G − WGᵀW,
+
+which is twice the orthogonal projection of G onto the tangent space at W. To first order the update is therefore projected gradient descent. The Cayley form bends that step onto the set of orthogonal matrices, which is what makes it a retraction.
+
+## Measuring orthogonality
+
+For square W, WWᵀ and WᵀW have the same eigenvalues, the squares of the singular values of W, and both are symmetric. So ‖WWᵀ − I‖_F² = ‖WᵀW − I‖_F² = Σ(σᵢ² − 1)². Either form measures the same departure from orthogonality, and WWᵀ can be computed by reading rows of W against rows of W, which is the contiguous direction for row-major storage.
 
 ## Limits of the argument
 
 All of this is exact arithmetic. In floating point the elimination and the matrix products each add rounding error, so W⁺ is orthogonal only to within a small residual, and that residual can grow over many steps. [validation.md](validation.md) describes how it will be measured.
-
-## Why it is a retraction
-
-Since I − K = 2I − (I + K), the update can be written W⁺ = W − η(I + K)⁻¹AW. For small η this is W − ηAW to first order, which is a step in a direction built from the gradient. The Cayley form bends that step onto the set of orthogonal matrices, which is what the term retraction means.
