@@ -1,8 +1,6 @@
 # cayley-retraction-c
 
-The weight update from my orthogonal RNN (LINK-TO-RNN-REPO), rewritten in C. The plan is to check it against the original NumPy code, then time the two against each other at several hidden sizes.
-
-This repository currently holds the design and documentation only. Every source file is a placeholder with a single comment, and nothing has been built, run or measured.
+The weight update from my orthogonal RNN ([LINK-TO-RNN-REPO)](https://github.com/Yuv4n/grassmann-ml), rewritten in C. The plan is to check it against the original NumPy code, then time the two against each other at several hidden sizes.
 
 ## The update
 

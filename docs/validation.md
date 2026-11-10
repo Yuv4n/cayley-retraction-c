@@ -4,7 +4,7 @@ Nothing in this file has been run. It fixes the method before any result exists,
 
 ## Correctness
 
-`reference/cayley_numpy.py` will hold the update exactly as it appears in the RNN repository (LINK-TO-RNN-REPO), with the commit noted. `reference/make_fixtures.py` will build W from the QR factorisation of a seeded random matrix, draw G from the same seed, run the reference and write inputs and outputs to files that the C tests read. The file format is undecided. Where the reference differs from the documentation on the transpose convention or the sign of η, the reference wins and the documentation is corrected.
+`reference/cayley_numpy.py` will hold the update exactly as it appears in the RNN repository (https://github.com/Yuv4n/grassmann-ml), with the commit noted. The RNN code has not been added to that repository yet, so this step waits on it. `reference/make_fixtures.py` will build W from the QR factorisation of a seeded random matrix, draw G from the same seed, run the reference and write inputs and outputs to files that the C tests read. The file format is undecided. Where the reference differs from the documentation on the transpose convention or the sign of η, the reference wins and the documentation is corrected.
 
 The tests will check:
 
